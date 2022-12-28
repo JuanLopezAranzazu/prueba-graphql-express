@@ -3,15 +3,18 @@ const port = config.port;
 
 const express = require("express");
 const app = express();
+app.use(express.json());
+require("./mongo");
 
 // graphql
-const schema = require("./schemas/index");
+// const schema = require("./schemas/index");
+const schemaMongo = require("./schemas/mongoSchema");
 const { graphqlHTTP } = require("express-graphql");
 
 app.use(
   "/graphql",
   graphqlHTTP({
-    schema: schema,
+    schema: schemaMongo,
     graphiql: true,
   })
 );
